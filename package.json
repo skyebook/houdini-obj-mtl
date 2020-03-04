@@ -1,0 +1,16 @@
+{
+  "name": "houdini-obj-mtl",
+  "version": "1.0.0",
+  "description": "Creates material definitions for assets exported from Houdini missing MTL files",
+  "main": "houdini-obj-mtl.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^4.1.1",
+    "line-transform-stream": "^0.1.0",
+    "mkdirp": "^1.0.3"
+  }
+}
