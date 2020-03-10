@@ -20,13 +20,15 @@ let destValue = '';
 program.description('Create material definitions (MTL) and modified OBJ files for a folder of Houdini-exported OBJ\'s').arguments('<source> <dest>').action((src, dst) => {
   sourceValue = src;
   destValue = dst;
-});
+}).option('--texture-prefix <type>', 'Prefix of texture filenames', '');
 
 program.parse(process.argv);
 
 const contents = fs.readdirSync(sourceValue);
 const filteredContents = contents.filter((p) => p.endsWith('.obj'));
 console.log(`Found ${filteredContents.length} OBJ's`);
+
+const texturePrefix = program.texturePrefix;
 
 // console.log(filteredContents);
 
@@ -44,7 +46,7 @@ const doSingle = async (filename) => {
 
   // Create text to put in MTL file
   let name = path.basename(filename, meshExtension);
-  const textureName = `${name}${textureExtension}`;
+  const textureName = `${texturePrefix}${name}${textureExtension}`;
   const mtlText = `newmtl textureMaterial\nmap_Kd ${textureName}`;
 
   const copyPromise = copyFile(`${sourceValue}/${textureName}`, `${destValue}/${textureName}`);
